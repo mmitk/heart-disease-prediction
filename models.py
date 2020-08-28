@@ -1,6 +1,7 @@
 import tensorflow as tf
 from tensorflow import keras
 
+
 import os
 import tempfile
 
@@ -45,12 +46,13 @@ class modelObj:
                 16, activation='relu',
                 input_shape=(n_cols,)),
             keras.layers.Dropout(0.5),
-            keras.layers.Dense(1, activation='sigmoid',bias_initializer=bias),
+            #keras.layers.Dense(2, activation='softmax',bias_initializer=bias),
+            keras.layers.Dense(2, activation='sigmoid'),
         ])
 
         model.compile(
             optimizer=keras.optimizers.Adam(lr=1e-3),
-            loss=keras.losses.BinaryCrossentropy(),
+            loss='binary_crossentropy',
             metrics=metrics)
 
         self.model = model
