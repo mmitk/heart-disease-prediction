@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from sklearn import preprocessing
+import matplotlib.pyplot as plt
 
 def plot_decision_function(X, y, clf, ax):
     plot_step = 0.02
@@ -24,3 +25,23 @@ def norm(df, target=None):
     if target is not None:
         df[target] = y
     return df
+
+def plot_metrics(history):
+    colors = plt.rcParams['axes.prop_cycle'].by_key()['color']
+    metrics =  ['loss', 'auc', 'precision', 'recall']
+    for n, metric in enumerate(metrics):
+        name = metric.replace("_"," ").capitalize()
+        plt.subplot(2,2,n+1)
+        plt.plot(history.epoch,  history.history[metric], color=colors[0], label='Train')
+        plt.plot(history.epoch, history.history['val_'+metric],
+             color=colors[0], linestyle="--", label='Val')
+        plt.xlabel('Epoch')
+        plt.ylabel(name)
+        if metric == 'loss':
+            plt.ylim([0, plt.ylim()[1]])
+        elif metric == 'auc':
+            plt.ylim([0.8,1])
+        else:
+            plt.ylim([0,1])
+
+        plt.legend()
