@@ -47,7 +47,7 @@ class modelObj:
                 input_shape=(n_cols,)),
             keras.layers.Dropout(0.5),
             #keras.layers.Dense(2, activation='softmax',bias_initializer=bias),
-            keras.layers.Dense(2, activation='sigmoid'),
+            keras.layers.Dense(1, activation='sigmoid'),
         ])
 
         model.compile(
