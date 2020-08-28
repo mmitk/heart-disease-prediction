@@ -38,6 +38,8 @@ class modelObj:
             self.model = None
 
     def create_model(self, n_cols, metrics=METRICS, bias=None):
+        if bias is not None:
+            bias = tf.keras.initializers.Constant(bias)
         model = keras.Sequential([
             keras.layers.Dense(
                 16, activation='relu',
