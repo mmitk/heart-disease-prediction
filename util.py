@@ -16,15 +16,17 @@ def plot_decision_function(X, y, clf, ax):
     ax.scatter(X[:, 0], X[:, 1], alpha=0.8, c=y, edgecolor='k')
 
 def norm(df, target=None):
+    df1 = df.copy(deep=True)
     if target is not None:
-        y = df.pop(target)
-    x = df.values  # returns a numpy array
-    min_max_scaler = preprocessing.MinMaxScaler()
-    x_scaled = min_max_scaler.fit_transform(x)
-    df = pd.DataFrame(x_scaled)
+        y = df1.pop(target)
+    x = df1.values  # returns a numpy array
+    standard_scaler = preprocessing.StandardScaler()
+    x_scaled = standard_scaler.fit_transform(x)
+    df1 = pd.DataFrame(x_scaled)
     if target is not None:
-        df[target] = y
-    return df
+        df1[target] = y
+
+    return df1
 
 def plot_metrics(history):
     colors = plt.rcParams['axes.prop_cycle'].by_key()['color']
