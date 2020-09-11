@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 from sklearn import preprocessing
+from collections import Counter
 import matplotlib.pyplot as plt
 
 def plot_decision_function(X, y, clf, ax):
@@ -47,3 +48,21 @@ def plot_metrics(history):
             plt.ylim([0,1])
 
         plt.legend()
+
+def plot_data(X_res, y_res, ax, col_names):
+    """
+    Parameters:
+        col_names: list of column names (2 maximum)
+    """
+    ax.scatter(X_res[col_names[0]], X_res[col_names[1]], c=y_res, alpha=0.8, edgecolor='k')
+    # make nice plotting
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.get_xaxis().tick_bottom()
+    ax.get_yaxis().tick_left()
+    ax.spines['left'].set_position(('outward', 10))
+    ax.spines['bottom'].set_position(('outward', 10))
+    return Counter(y_res)
+
+
+    

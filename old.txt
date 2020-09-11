@@ -1,0 +1,11 @@
+# Plot normalized data and normalized+resampled data
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 12))
+
+ax_arr = (ax1, ax2)
+
+col_names = ['age','ejection_fraction']
+
+util.plot_data(X.to_numpy(),y,ax1,col_names)
+ax1.set_title('Original (Normalized)')
+util.plot_data(X_resampled.to_numpy(), y_resampled, ax2,col_names)
+ax2.set_title('Resampled (Normalized)')
